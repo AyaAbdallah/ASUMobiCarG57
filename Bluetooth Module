@@ -1,0 +1,7 @@
+Difference between bluetooth module HC-05 and HC-06
+•	The HC-05 module can build a connection to other modules. E.g. a Robot being a master and connecting to slave bluetooth module.
+Or in slave mode to make a wireless bridge to a notebook.
+•	The HC-06 module only can be a slave. 
+This makes it only useful for say connecting a notebook as a master to a robot with a slave module e.g. for a wireless serial bridge.
+If you are only wanting to talk between the phone and your arduino than the HC06 would work fine, however if at some point in time you want to talk to another arduino, than hc05 would be the way to go.
+SO HC-05 sends and receives but HC-06 only receives using any device has bluetooth

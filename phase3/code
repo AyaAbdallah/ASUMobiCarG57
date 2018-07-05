@@ -1,0 +1,113 @@
+int EN1 = 6;
+int EN2 = 3;
+int IN1 = 2;
+int IN2 = 4;
+int IN3 = 5;
+int IN4 = 7;
+#include <SoftwareSerial.h>
+SoftwareSerial myserial (0,1);
+char Move = 'w';
+float v ;
+float d ;
+float de;
+
+void setup() {
+pinMode ( IN1 , OUTPUT );
+ pinMode ( IN2 , OUTPUT);
+ pinMode ( EN1 , OUTPUT ); 
+ pinMode ( EN2 , OUTPUT );
+ pinMode ( IN3 , OUTPUT );
+ pinMode ( IN4 , OUTPUT);
+ pinMode (13 , OUTPUT );
+myserial.begin(9600);
+Serial.begin(9600);
+}
+
+void loop() {
+  
+        analogWrite ( EN1 , 90 );
+        analogWrite ( EN2 , 87 );
+        
+       v = 0.699; //m/s
+       d= 154.28 ; //degree/s....right
+       de =164.044;
+       
+       if(myserial.available())
+{
+  Move = myserial.read() ;
+  Serial.write(myserial.read());
+   if ( Move == 'w')
+   {
+    //infinity shape
+         digitalWrite( IN1 ,LOW );//right
+         digitalWrite( IN4 ,LOW );  
+         digitalWrite (IN2, HIGH );
+          digitalWrite( IN3 ,LOW );
+          delay ((268/d)*1000 );
+
+        digitalWrite( IN1 ,LOW );//forwrad
+        digitalWrite( IN4 ,HIGH );  
+        digitalWrite (IN2, HIGH );
+        digitalWrite( IN3 ,LOW );
+        delay ( (1.2 /v)*1000 );
+
+        digitalWrite( IN1 ,LOW );//left
+        digitalWrite( IN4 ,HIGH );
+        digitalWrite (IN2, LOW );
+        digitalWrite( IN3 ,LOW ); 
+        delay( (255/de)*1000 );
+
+          digitalWrite( IN1 ,LOW );//forwrad
+        digitalWrite( IN4 ,HIGH );  
+        digitalWrite (IN2, HIGH );
+        digitalWrite( IN3 ,LOW );
+        delay ( (1.2 /v)*1000 );
+
+         digitalWrite( IN1 ,LOW );
+        digitalWrite( IN4 ,LOW );  
+         digitalWrite (IN2, LOW );
+         digitalWrite( IN3 ,LOW );
+         delay (25000);
+
+//rectangular1
+        for ( int i=0 ; i<4 ; i++ )
+    {
+
+      digitalWrite( IN1 ,LOW );//right90
+  digitalWrite( IN4 ,LOW );  
+  digitalWrite (IN2, HIGH );
+  digitalWrite( IN3 ,LOW );
+  delay ( (94/d)*1000 );
+  
+    digitalWrite( IN1 ,LOW );//forward
+  digitalWrite( IN4 ,HIGH );  
+  digitalWrite (IN2, HIGH );
+  digitalWrite( IN3 ,LOW );
+  delay ( (1.5/v)*1000 );
+  
+   
+  
+    }
+    digitalWrite( IN1 ,LOW );
+  digitalWrite( IN4 ,LOW );  
+  digitalWrite (IN2, LOW );
+  digitalWrite( IN3 ,LOW );
+  delay (25000);
+
+  //circle
+  analogWrite ( EN1 , 185 );//150
+  analogWrite ( EN2 , 100 );//100
+
+ digitalWrite( IN1 ,LOW );//forward
+  digitalWrite( IN4 ,HIGH );  
+  digitalWrite (IN2, HIGH );
+  digitalWrite( IN3 ,LOW );
+  delay ((4.8/v)*1000 );
+  
+  digitalWrite( IN1 ,LOW );
+  digitalWrite( IN4 ,LOW );  
+  digitalWrite (IN2, LOW );
+  digitalWrite( IN3 ,LOW );
+   }
+   }
+}
